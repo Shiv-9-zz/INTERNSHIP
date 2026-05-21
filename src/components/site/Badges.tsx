@@ -6,12 +6,12 @@ const config: Record<BadgeKind, { icon: typeof ShieldCheck; label: string; cls: 
   aadhaar: {
     icon: ShieldCheck,
     label: "Aadhaar Verified",
-    cls: "bg-[color:var(--color-verified)]/10 text-[color:var(--color-verified)] ring-[color:var(--color-verified)]/30",
+    cls: "bg-[color:var(--color-verified)]/12 text-[color:var(--color-verified)] ring-[color:var(--color-verified)]/25",
   },
   blockchain: {
     icon: Link2,
     label: "On Blockchain",
-    cls: "bg-[color:var(--color-blockchain)]/10 text-[color:var(--color-blockchain)] ring-[color:var(--color-blockchain)]/30",
+    cls: "bg-[color:var(--color-blockchain)]/12 text-[color:var(--color-blockchain)] ring-[color:var(--color-blockchain)]/25",
   },
   cv: {
     icon: Eye,
@@ -21,7 +21,7 @@ const config: Record<BadgeKind, { icon: typeof ShieldCheck; label: string; cls: 
   lineage: {
     icon: Dna,
     label: "Lineage Linked",
-    cls: "bg-accent/15 text-[color:var(--color-primary)] ring-accent/40",
+    cls: "bg-accent/12 text-[color:var(--color-primary)] ring-accent/35",
   },
 };
 
@@ -37,10 +37,10 @@ export function VerifiedBadge({
   const c = config[kind];
   const Icon = c.icon;
   const sizeCls =
-    size === "sm" ? "text-[11px] px-2 py-0.5 gap-1" : "text-xs px-2.5 py-1 gap-1.5";
+    size === "sm" ? "text-[10px] px-2 py-0.5 gap-1" : "text-xs px-2.5 py-1 gap-1.5";
   return (
     <span
-      className={`inline-flex items-center rounded-full ring-1 font-medium ${sizeCls} ${c.cls} ${
+      className={`inline-flex items-center rounded-full ring-1 font-semibold backdrop-blur-sm ${sizeCls} ${c.cls} ${
         pulse ? "animate-pulse-ring" : ""
       }`}
     >

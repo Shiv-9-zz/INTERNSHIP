@@ -102,6 +102,10 @@
   --chart-3: oklch(0.55 0.18 280);
   --chart-4: oklch(0.58 0.14 160);
   --chart-5: oklch(0.72 0.16 70);
+
+  --shadow-soft: 0 4px 24px -4px color-mix(in oklab, var(--primary) 12%, transparent);
+  --shadow-elevated: 0 20px 50px -24px color-mix(in oklab, var(--primary) 22%, transparent);
+  --shadow-glow-accent: 0 0 40px -8px color-mix(in oklab, var(--accent) 45%, transparent);
 }
 
 .dark {
@@ -121,8 +125,13 @@
   html, body {
     font-family: var(--font-sans);
     background-color: var(--color-background);
+    background-image:
+      radial-gradient(ellipse 120% 80% at 100% -20%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 50%),
+      radial-gradient(ellipse 80% 60% at 0% 100%, color-mix(in oklab, var(--primary) 6%, transparent), transparent 45%);
+    background-attachment: fixed;
     color: var(--color-foreground);
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3, .font-display {
@@ -192,12 +201,94 @@
     100% { box-shadow: 0 0 0 0 transparent; }
   }
 
+  .glass {
+    background: color-mix(in oklab, var(--color-card) 72%, transparent);
+    backdrop-filter: blur(12px) saturate(1.2);
+    -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  }
+
+  .glass-dark {
+    background: color-mix(in oklab, var(--color-surface-dark) 75%, transparent);
+    backdrop-filter: blur(14px) saturate(1.1);
+    -webkit-backdrop-filter: blur(14px) saturate(1.1);
+  }
+
+  .text-gradient-gold {
+    background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent) 55%, oklch(0.68 0.12 55) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .section-eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-primary/15 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-wider text-primary;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-5 py-2.5 text-sm font-semibold text-primary-foreground shadow-md transition;
+    box-shadow: var(--shadow-soft);
+  }
+  .btn-primary:hover {
+    @apply bg-[color:var(--color-primary-light)];
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-accent px-5 py-2.5 text-sm font-semibold text-[color:var(--color-accent-foreground)] transition;
+    box-shadow: var(--shadow-glow-accent);
+  }
+  .btn-accent:hover {
+    @apply bg-[color:var(--color-accent-light)];
+    transform: translateY(-1px);
+  }
+
+  .hero-mesh {
+    background-image:
+      radial-gradient(ellipse 80% 50% at 20% 40%, color-mix(in oklab, var(--accent) 18%, transparent), transparent 55%),
+      radial-gradient(ellipse 60% 80% at 85% 20%, color-mix(in oklab, var(--blockchain) 12%, transparent), transparent 50%),
+      radial-gradient(ellipse 50% 40% at 50% 100%, color-mix(in oklab, var(--primary-light) 25%, transparent), transparent 60%);
+  }
+
+  .animate-stagger > * {
+    animation: fade-up 0.65s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  }
+  .animate-stagger > *:nth-child(1) { animation-delay: 0ms; }
+  .animate-stagger > *:nth-child(2) { animation-delay: 80ms; }
+  .animate-stagger > *:nth-child(3) { animation-delay: 160ms; }
+  .animate-stagger > *:nth-child(4) { animation-delay: 240ms; }
+  .animate-stagger > *:nth-child(5) { animation-delay: 320ms; }
+  .animate-stagger > *:nth-child(6) { animation-delay: 400ms; }
+
+  .nav-link-active {
+    @apply relative text-primary;
+  }
+  .nav-link-active::after {
+    content: "";
+    position: absolute;
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 0.25rem;
+    height: 2px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--accent), var(--primary-light));
+  }
+
   .card-lift {
-    transition: transform 0.25s ease-out, box-shadow 0.25s ease-out, border-color 0.25s ease-out;
+    transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1), box-shadow 0.3s ease-out, border-color 0.3s ease-out;
+    box-shadow: var(--shadow-soft);
   }
   .card-lift:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 18px 40px -20px color-mix(in oklab, var(--color-primary) 30%, transparent);
-    border-color: color-mix(in oklab, var(--color-accent) 60%, var(--color-border));
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-elevated);
+    border-color: color-mix(in oklab, var(--color-accent) 50%, var(--color-border));
+  }
+
+  .input-enhanced {
+    @apply h-11 w-full rounded-xl border border-input bg-card/90 px-4 text-sm outline-none transition;
+    box-shadow: inset 0 1px 2px color-mix(in oklab, var(--primary) 4%, transparent);
+  }
+  .input-enhanced:focus {
+    @apply border-accent ring-2 ring-accent/20;
   }
 }

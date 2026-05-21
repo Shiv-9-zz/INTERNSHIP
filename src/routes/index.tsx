@@ -8,7 +8,6 @@ import {
   ArrowDown,
   Eye,
   Link2,
-  Sparkles,
 } from "lucide-react";
 import { cattleData } from "@/lib/cattle-data";
 import { CattleCard } from "@/components/site/CattleCard";
@@ -33,26 +32,19 @@ function LandingPage() {
     <>
       {/* HERO */}
       <section className="relative isolate overflow-hidden bg-[color:var(--color-surface-dark)] text-white">
-        <div className="absolute inset-0 bg-grain opacity-60" aria-hidden />
+        <div className="absolute inset-0 hero-mesh" aria-hidden />
+        <div className="absolute inset-0 bg-grain opacity-50" aria-hidden />
         <div
-          className="absolute inset-0 opacity-[0.07]"
+          className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[color:var(--color-surface-dark)] to-transparent"
           aria-hidden
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 20% 30%, rgba(212,160,23,0.5), transparent 40%), radial-gradient(circle at 80% 70%, rgba(99,102,241,0.4), transparent 50%)",
-          }}
         />
         <div className="mx-auto grid max-w-7xl gap-12 px-4 py-20 sm:px-6 md:py-28 lg:py-32">
           <div className="mx-auto max-w-3xl text-center">
-            <span className="animate-fade-up inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs text-white/80 backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5 text-accent" />
-              Research project · IIT (BHU) Varanasi
-            </span>
             <h1
-              className="animate-fade-up mt-6 font-display text-4xl font-bold leading-[1.05] text-balance sm:text-5xl md:text-6xl lg:text-7xl"
-              style={{ animationDelay: "80ms" }}
+              className="animate-fade-up font-display text-4xl font-bold leading-[1.05] text-balance sm:text-5xl md:text-6xl lg:text-7xl"
             >
-              India's First Verified <span className="text-accent">Cattle Marketplace</span>
+              India's First Verified{" "}
+              <span className="text-gradient-gold">Cattle Marketplace</span>
             </h1>
             <p
               className="animate-fade-up mx-auto mt-6 max-w-2xl text-base text-white/75 sm:text-lg"
@@ -71,16 +63,13 @@ function LandingPage() {
               className="animate-fade-up mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row"
               style={{ animationDelay: "280ms" }}
             >
-              <Link
-                to="/marketplace"
-                className="group inline-flex w-full items-center justify-center gap-2 rounded-xl bg-accent px-6 py-3.5 font-semibold text-[color:var(--color-accent-foreground)] shadow-lg shadow-amber-900/30 transition hover:bg-[color:var(--color-accent-light)] sm:w-auto"
-              >
+              <Link to="/marketplace" className="btn-accent group w-full px-7 py-3.5 sm:w-auto">
                 Browse Cattle
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
               </Link>
               <Link
                 to="/register"
-                className="inline-flex w-full items-center justify-center rounded-xl border border-white/30 bg-white/5 px-6 py-3.5 font-semibold text-white backdrop-blur transition hover:bg-white/10 sm:w-auto"
+                className="inline-flex w-full items-center justify-center rounded-xl border border-white/25 bg-white/8 px-7 py-3.5 font-semibold text-white backdrop-blur-md transition hover:border-white/40 hover:bg-white/12 sm:w-auto"
               >
                 Register Your Cattle
               </Link>
@@ -107,10 +96,8 @@ function LandingPage() {
       <section className="bg-[color:var(--color-surface-2)] py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-              How it works
-            </p>
-            <h2 className="mt-3 font-display text-3xl md:text-4xl text-balance">
+            <p className="section-eyebrow mx-auto">How it works</p>
+            <h2 className="mt-4 font-display text-3xl md:text-4xl text-balance">
               From farm to verified listing in 4 steps
             </h2>
             <p className="mt-3 font-hindi text-sm text-muted-foreground">
@@ -118,10 +105,10 @@ function LandingPage() {
             </p>
           </div>
 
-          <ol className="relative mt-14 grid gap-8 md:grid-cols-4">
+          <ol className="animate-stagger relative mt-14 grid gap-6 md:grid-cols-4">
             <span
               aria-hidden
-              className="absolute left-0 right-0 top-7 hidden h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent md:block"
+              className="absolute left-0 right-0 top-10 hidden h-px bg-gradient-to-r from-transparent via-primary/25 to-transparent md:block"
             />
             {[
               { icon: ShieldCheck, title: "Verify with Aadhaar", hi: "आधार सत्यापन", desc: "Owner identity verified via UIDAI. Only a secure hash is stored." },
@@ -131,18 +118,23 @@ function LandingPage() {
             ].map((step, i) => {
               const Icon = step.icon;
               return (
-                <li key={step.title} className="relative">
-                  <div className="relative z-10 flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-sm ring-1 ring-border">
-                    <Icon className="h-6 w-6 text-primary" />
+                <li
+                  key={step.title}
+                  className="card-lift relative rounded-2xl border border-border/80 bg-card p-6"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="relative z-10 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-[color:var(--color-primary-light)] text-primary-foreground shadow-md">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="font-mono text-[10px] font-medium uppercase tracking-wider text-accent">
+                        Step 0{i + 1}
+                      </p>
+                      <h3 className="mt-1 font-display text-lg text-foreground">{step.title}</h3>
+                      <p className="mt-0.5 font-hindi text-xs text-muted-foreground">{step.hi}</p>
+                    </div>
                   </div>
-                  <div className="mt-5">
-                    <p className="font-display text-sm font-semibold text-accent">
-                      Step 0{i + 1}
-                    </p>
-                    <h3 className="mt-1 font-display text-xl text-foreground">{step.title}</h3>
-                    <p className="mt-0.5 font-hindi text-xs text-muted-foreground">{step.hi}</p>
-                    <p className="mt-3 text-sm text-muted-foreground">{step.desc}</p>
-                  </div>
+                  <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
                 </li>
               );
             })}
@@ -154,10 +146,8 @@ function LandingPage() {
       <section className="bg-grain-warm relative bg-[color:var(--color-surface)] py-20 md:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-              Built on trust
-            </p>
-            <h2 className="mt-3 font-display text-3xl md:text-4xl text-balance">
+            <p className="section-eyebrow mx-auto">Built on trust</p>
+            <h2 className="mt-4 font-display text-3xl md:text-4xl text-balance">
               Three layers of verification on every animal
             </h2>
           </div>
@@ -190,7 +180,7 @@ function LandingPage() {
               return (
                 <div
                   key={card.title}
-                  className="card-lift rounded-2xl border border-border bg-card p-7"
+                  className="card-lift rounded-2xl border border-border/80 bg-card p-7 shadow-sm"
                 >
                   <div
                     className="grid h-12 w-12 place-items-center rounded-xl"
@@ -215,9 +205,7 @@ function LandingPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-wider text-primary">
-                Recently verified
-              </p>
+              <p className="section-eyebrow">Recently verified</p>
               <h2 className="mt-2 font-display text-3xl md:text-4xl">Cattle on the market</h2>
             </div>
             <Link
@@ -290,10 +278,7 @@ function LandingPage() {
             Start selling your cattle today
           </h2>
           <p className="mt-3 font-hindi text-sm opacity-80">आज ही अपना पशु बेचें</p>
-          <Link
-            to="/register"
-            className="mt-8 inline-flex items-center gap-2 rounded-xl bg-primary px-7 py-3.5 font-semibold text-primary-foreground transition hover:bg-[color:var(--color-primary-light)]"
-          >
+          <Link to="/register" className="btn-primary mt-8 px-8 py-3.5">
             Register now <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

@@ -60,23 +60,37 @@ function MarketplacePage() {
 
   return (
     <div className="bg-[color:var(--color-surface-2)]">
+      {/* Page intro */}
+      <div className="border-b border-border/60 bg-[color:var(--color-surface-dark)] px-4 py-10 text-white sm:px-6">
+        <div className="relative mx-auto max-w-7xl overflow-hidden rounded-2xl">
+          <div className="absolute inset-0 hero-mesh opacity-80" aria-hidden />
+          <div className="relative px-6 py-8 sm:px-10 sm:py-10">
+            <p className="text-xs font-semibold uppercase tracking-widest text-accent">Marketplace</p>
+            <h1 className="mt-2 font-display text-3xl md:text-4xl">Browse verified cattle</h1>
+            <p className="mt-2 max-w-lg text-sm text-white/70">
+              Filter by breed, health grade, and distance. Every listing is Aadhaar-linked and on-chain.
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Top bar */}
-      <div className="sticky top-16 z-30 border-b border-border bg-[color:var(--color-surface)]/95 backdrop-blur">
+      <div className="sticky top-[4.25rem] z-30 border-b border-border/70 glass">
         <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6">
           <div className="flex flex-wrap items-center gap-3">
-            <div className="relative flex-1 min-w-[200px]">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+            <div className="relative min-w-[200px] flex-1">
+              <Search className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
               <input
                 value={q}
                 onChange={(e) => setQ(e.target.value)}
                 placeholder="Search by breed, location, price…"
-                className="h-11 w-full rounded-lg border border-input bg-card pl-10 pr-3 text-sm outline-none transition focus:border-accent"
+                className="input-enhanced pl-10"
               />
             </div>
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value as (typeof sorts)[number])}
-              className="h-11 rounded-lg border border-input bg-card px-3 text-sm outline-none focus:border-accent"
+              className="input-enhanced w-auto min-w-[10rem] appearance-none pr-8"
             >
               {sorts.map((s) => (
                 <option key={s}>{s}</option>
@@ -84,7 +98,7 @@ function MarketplacePage() {
             </select>
             <button
               onClick={() => setShowFilters((v) => !v)}
-              className="inline-flex h-11 items-center gap-2 rounded-lg border border-input bg-card px-4 text-sm font-medium lg:hidden"
+              className="inline-flex h-11 items-center gap-2 rounded-xl border border-input bg-card px-4 text-sm font-semibold shadow-sm transition hover:bg-secondary lg:hidden"
             >
               <SlidersHorizontal className="h-4 w-4" /> Filters
             </button>
@@ -95,10 +109,10 @@ function MarketplacePage() {
               <button
                 key={t}
                 onClick={() => setType(t)}
-                className={`rounded-full px-4 py-1.5 text-xs font-medium transition ${
+                className={`rounded-full px-4 py-2 text-xs font-semibold transition ${
                   type === t
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-card text-muted-foreground ring-1 ring-border hover:text-foreground"
+                    ? "bg-primary text-primary-foreground shadow-md"
+                    : "bg-card text-muted-foreground ring-1 ring-border hover:bg-secondary hover:text-foreground"
                 }`}
               >
                 {t}
@@ -113,7 +127,7 @@ function MarketplacePage() {
         <aside
           className={`${
             showFilters ? "block" : "hidden"
-          } space-y-6 rounded-2xl border border-border bg-card p-5 lg:sticky lg:top-40 lg:block lg:h-fit`}
+          } space-y-6 rounded-2xl border border-border/80 bg-card p-5 shadow-sm lg:sticky lg:top-44 lg:block lg:h-fit`}
         >
           <div className="flex items-center justify-between lg:hidden">
             <h3 className="font-display text-lg">Filters</h3>
@@ -214,8 +228,11 @@ function MarketplacePage() {
               </div>
             ))}
             {filtered.length === 0 && (
-              <div className="col-span-full rounded-2xl border border-dashed border-border p-12 text-center text-muted-foreground">
-                No cattle match your filters. Try widening your range.
+              <div className="col-span-full rounded-2xl border border-dashed border-border bg-card/50 p-16 text-center">
+                <p className="font-display text-lg text-foreground">No cattle found</p>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  No cattle match your filters. Try widening your range.
+                </p>
               </div>
             )}
           </div>
@@ -250,7 +267,10 @@ function MapPanel({
   });
 
   return (
-    <div className="relative h-full overflow-hidden rounded-2xl border border-border bg-[color:var(--color-surface-dark)]">
+    <div
+      className="relative h-full overflow-hidden rounded-2xl border border-border/80 bg-[color:var(--color-surface-dark)] shadow-lg"
+      style={{ boxShadow: "var(--shadow-elevated)" }}
+    >
       {/* base */}
       <div
         className="absolute inset-0 opacity-70"

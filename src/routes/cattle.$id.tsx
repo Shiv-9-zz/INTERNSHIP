@@ -55,11 +55,15 @@ function CattleDetailPage() {
         {/* Hero */}
         <div className="grid gap-8 lg:grid-cols-[1.4fr_1fr]">
           <div>
-            <div className="relative overflow-hidden rounded-3xl bg-muted">
+            <div className="relative overflow-hidden rounded-3xl bg-muted shadow-lg ring-1 ring-border/50">
               <img
                 src={c.photo}
                 alt={`${c.breed} ${c.gender}`}
                 className="aspect-video w-full object-cover"
+              />
+              <div
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"
+                aria-hidden
               />
               <div className="absolute right-4 top-4 flex flex-col items-end gap-2">
                 <span className="inline-flex items-center gap-2 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-[color:var(--color-verified)] shadow-md">
@@ -85,7 +89,10 @@ function CattleDetailPage() {
           </div>
 
           {/* Info panel */}
-          <aside className="self-start rounded-3xl border border-border bg-card p-7">
+          <aside
+            className="self-start rounded-3xl border border-border/80 bg-card p-7 shadow-lg lg:sticky lg:top-44"
+            style={{ boxShadow: "var(--shadow-soft)" }}
+          >
             <p className="font-mono text-xs text-muted-foreground">{c.id}</p>
             <h1 className="mt-1 font-display text-3xl text-foreground md:text-4xl">{c.breed}</h1>
             <p className="font-hindi text-sm text-muted-foreground">
@@ -132,10 +139,10 @@ function CattleDetailPage() {
             </div>
 
             <div className="mt-6 grid grid-cols-2 gap-3">
-              <button className="rounded-lg border border-input bg-card px-4 py-3 text-sm font-medium hover:bg-secondary">
+              <button className="rounded-xl border border-input bg-card px-4 py-3 text-sm font-semibold transition hover:bg-secondary">
                 Contact Seller
               </button>
-              <button className="rounded-lg bg-accent px-4 py-3 text-sm font-semibold text-[color:var(--color-accent-foreground)] transition hover:bg-[color:var(--color-accent-light)]">
+              <button className="btn-accent justify-center py-3">
                 Buy Now · अभी खरीदें
               </button>
             </div>
